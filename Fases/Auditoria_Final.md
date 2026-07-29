@@ -29,6 +29,14 @@ Para terminar el proyecto, debemos aplicar la filosofía **Zero Trust** (Confian
 
 ### 🛠️ Procedimiento Práctico de Hardening
 
+> [!example] 🎬 Antes de empezar (todavía SIN grabar, y luego arranca)
+> Ya conoces el método desde los prerrequisitos, así que va solo el recordatorio:
+> 1. **Crea la entrada de apuntes** de esta fase (`v2-auditoria-final-hardening-y-cierre-de-seguridad.md`) con su estructura, vacía.
+> 2. **Léete los 2 pasos** del procedimiento enteros, para no atascarte a mitad del vídeo.
+> 3. Ten **OBS** listo y comprueba **pantalla y micrófono**.
+>
+> Cuando lo tengas: **arranca la grabación, preséntate y muestra tu identidad**. A partir de ahí, **todo queda grabado** — incluido cualquier paso previo de preparación que venga a continuación.
+
 > [!example] Paso 1: Cierre de Puertos en Azure
 > Ve al portal de **Azure -> Network Security Group (NSG)** y modifica las siguientes reglas para aplicar la máxima seguridad:
 > 1.  **Puerto 2222 (SSH):** Cambia el ORIGEN de `Any` a `IP Address` e introduce el rango de tu VPN: `10.0.0.0/24`.
