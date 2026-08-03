@@ -40,7 +40,7 @@
 > Crear una **máquina virtual en Azure** que aloje Ubuntu Server LTS. Este servidor será tu controlador de dominio, tu almacenamiento de archivos y la base de toda la infraestructura BoochanV2. Lo protegerás con un **NSG (firewall cloud)** que bloquea internet y abre solo los puertos imprescindibles: 9090 para monitoreo, 22 para administración.
 
 > [!tip] Hoja de Ruta
-> 1. Crear una VM en Azure con Ubuntu Server 24.04 LTS (2 GB RAM mínimo)
+> 1. Crear una VM en Azure con Ubuntu Server 26.04 LTS (2 GB RAM mínimo)
 > 2. Configurar el NSG: abrir puertos 9090 (Cockpit) y 22 (SSH) — nada más
 > 3. Conectarse al servidor por SSH desde tu PC (primera vez que entras)
 > 4. Verificar acceso a internet y DNS (`curl google.com`)
@@ -108,14 +108,23 @@
 > | **Grupo de recursos** | Crea uno nuevo → `rg-boochan-[tunombre]` |
 > | **Nombre de la máquina virtual** | `UbuntuServer` |
 > | **Región** | La que indique tu profesor |
-> | **Imagen** | `Ubuntu Server 22.04 LTS - x64 Gen2` |
+> | **Imagen** | `Ubuntu Server 26.04 LTS - x64 Gen2` (ver aviso debajo de la tabla) |
 > | **Tamaño** | `Standard_B2s` (2 vCPUs, 4 GB RAM) |
 > | **Tipo de autenticación** | `Contraseña` |
 > | **Nombre de usuario** | `boochan` |
-> | **Contraseña** | `P@ssword2026!` *(¡anótala!)* |
+> | **Contraseña** | `P@ssw0rd.SOR.2026` *(¡anótala!)* |
 >
 > 4. En la pestaña **`Redes`**, deja todos los valores por defecto. Azure crea automáticamente la red y un NSG básico con el puerto SSH (22) ya abierto.
 > 5. Pulsa **`Revisar y crear`** y luego **`Crear`**. Espera 2-3 minutos hasta que el despliegue termine.
+>
+> > [!warning] ⚠️ Dos avisos sobre esta pantalla: la imagen y la contraseña
+> > **1. El nombre exacto de la imagen.** En la tabla pone `Ubuntu Server 26.04 LTS - x64 Gen2`, pero Azure **cambia la redacción de sus imágenes cada pocos meses** (a veces añade el nombre del publicador, a veces cambia "Gen2" de sitio). Busca `Ubuntu Server 26.04` en el desplegable y **coge la LTS de 64 bits que aparezca**, aunque el texto no coincida palabra por palabra con lo que pone aquí. Si solo te aparece otra versión LTS, avisa al profesor antes de seguir.
+> >
+> > **2. Aquí NO vale el `P@ssw0rd` del resto del módulo.** En las máquinas locales usamos `P@ssw0rd`. Azure la rechaza por dos motivos a la vez: el portal exige **entre 12 y 72 caracteres** (`P@ssw0rd` tiene 8), y además mantiene una **lista negra de las contraseñas más usadas del mundo**, en la que `P@ssw0rd` está de las primeras. Por eso aquí es `P@ssw0rd.SOR.2026`.
+> >
+> > La lección real: la contraseña que es aceptable en tu portátil aislado **deja de serlo en cuanto la máquina tiene IP pública**, y el proveedor te lo impone aunque tú no quieras.
+> >
+> > ⚠️ **No la confundas con la del dominio.** Esta es la del usuario `boochan` de la VM. La del **Administrator del dominio** (Fase 4 en adelante) sigue siendo `P@ssw0rd`, porque ahí manda la política de Active Directory, no la de Azure. **Son dos. Anota las dos.**
 >
 > > [!important] 💡 ¿Qué es el "Grupo de Recursos"?
 > > Piensa en él como una **carpeta de proyecto**. Agrupa todos los componentes de tu servidor (la VM, el disco duro, la red...) para que al final del curso puedas borrarlos todos juntos con un solo clic, evitando costes innecesarios.
@@ -160,7 +169,7 @@
 > ```bash
 > ssh boochan@TU_IP_PUBLICA
 > ```
-> La primera vez verás un mensaje de advertencia sobre la autenticidad del servidor. Escribe `yes` y pulsa Enter. A continuación escribe tu contraseña (`P@ssword2026!`).
+> La primera vez verás un mensaje de advertencia sobre la autenticidad del servidor. Escribe `yes` y pulsa Enter. A continuación escribe tu contraseña (`P@ssw0rd.SOR.2026`).
 >
 > > [!warning] ⚠️ La contraseña no se ve mientras la escribes
 > > En Linux y en SSH, cuando introduces una contraseña el cursor no se mueve y no aparecen asteriscos. Es una medida de seguridad normal. Escríbela y pulsa Enter.

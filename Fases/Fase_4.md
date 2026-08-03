@@ -154,7 +154,7 @@
 > > - **`git clone`:** Descarga una copia completa del proyecto desde internet a tu servidor, igual que descargar un ZIP pero de forma más profesional.
 > > - **`chmod +x`:** En Linux, los archivos descargados no "tienen permiso" para ejecutarse por seguridad. Este comando le pone la etiqueta de **ejecutable**.
 > > - **El punto y la barra (`./`):** Le dice a Linux: "Busca este archivo **aquí mismo**, en esta carpeta". Sin el `./`, Linux buscaría el comando en las carpetas del sistema y no lo encontraría.
-> > - **Los valores por defecto del script:** El script ya viene configurado con los valores correctos del proyecto (`BOOCHAN.SPACE`, contraseña `P@ssword2026!`). No necesitas modificar nada salvo que tu profesor indique lo contrario.
+> > - **Los valores por defecto del script:** El script ya viene configurado con los valores correctos del proyecto (`BOOCHAN.SPACE`, contraseña `P@ssw0rd`). No necesitas modificar nada salvo que tu profesor indique lo contrario.
 
 > [!example] Paso 2: Verificación de Servicios
 > Una vez finalizado el script, debemos comprobar que el "corazón" del dominio está latiendo:

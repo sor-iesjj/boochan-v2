@@ -34,7 +34,7 @@ BoochanV2 es la rama **Azure + Linux** — la versión de la que parten todas la
 ## ⚠️ Antes de empezar: requisitos del proyecto (LÉEME)
 
 - **Cuenta de Azure gestionada por el profesor**, con las credenciales de acceso al Azure Portal.
-- Una VM `Standard_B2s` (2 vCPU, 4 GB RAM) con **Ubuntu Server 22.04 LTS**, protegida por un **Network Security Group (NSG)** que solo abre los puertos necesarios.
+- Una VM `Standard_B2s` (2 vCPU, 4 GB RAM) con **Ubuntu Server 26.04 LTS**, protegida por un **Network Security Group (NSG)** que solo abre los puertos necesarios.
 - **Windows 11 (PC físico del aula)** como cliente, necesario a partir de la Fase 8 — es el propio ordenador del alumno unido al dominio por VPN, no una máquina virtual.
 - **WireGuard** instalado tanto en el servidor como en el PC del aula, desde la Fase 3.
 - **Apagar o desasignar la VM** al terminar cada sesión si el profesor lo indica, para no generar coste innecesario.
@@ -59,7 +59,7 @@ El detalle completo está al inicio de la **[Fase 1](Fases/Fase_1.md)**.
 
 ### Resumen de cada fase
 
-**[Fase 1 — Infraestructura Cloud (Azure IaaS)](Fases/Fase_1.md):** se despliega la VM `Standard_B2s` con Ubuntu Server 22.04 LTS y se protege con un NSG que abre solo los puertos necesarios (SSH en el 2222 en vez del 22 para despistar a los bots, WireGuard, y los puertos de Active Directory). Se fija el dominio del proyecto: `BOOCHAN` / `BOOCHAN.SPACE`.
+**[Fase 1 — Infraestructura Cloud (Azure IaaS)](Fases/Fase_1.md):** se despliega la VM `Standard_B2s` con Ubuntu Server 26.04 LTS y se protege con un NSG que abre solo los puertos necesarios (SSH en el 2222 en vez del 22 para despistar a los bots, WireGuard, y los puertos de Active Directory). Se fija el dominio del proyecto: `BOOCHAN` / `BOOCHAN.SPACE`.
 
 **[Fase 2 — Purga y Preparación del Entorno](Fases/Fase_2.md):** se elimina el Samba preinstalado (para liberar el puerto 445), se instalan las dependencias (Samba, Kerberos, winbind, WireGuard…) y se fija el FQDN del servidor en `/etc/hosts`.
 
@@ -85,12 +85,12 @@ El detalle completo está al inicio de la **[Fase 1](Fases/Fase_1.md)**.
 | :--- | :--- |
 | **Nombre NetBIOS** | `BOOCHAN` |
 | **Realm (dominio completo)** | `BOOCHAN.SPACE` |
-| **VM del servidor** | `Standard_B2s` (2 vCPU, 4 GB RAM), Ubuntu Server 22.04 LTS |
+| **VM del servidor** | `Standard_B2s` (2 vCPU, 4 GB RAM), Ubuntu Server 26.04 LTS |
 | **IP privada del servidor (Azure)** | `10.0.0.1` |
 | **Red del túnel VPN (WireGuard)** | `10.0.0.0/24` (coincide con el rango de Azure a propósito) |
 | **Acceso / credenciales** | Usuario `boochan` + contraseña, SSH por el puerto `2222` |
 | **Firewall perimetral** | Network Security Group (NSG) de Azure |
-| **Sistema operativo servidor** | Ubuntu Server 22.04 LTS (headless) |
+| **Sistema operativo servidor** | Ubuntu Server 26.04 LTS (headless) |
 | **Sistema operativo cliente** | Windows 11 (PC físico del aula) |
 | **Plataforma / coste** | Microsoft Azure (cuenta gestionada por el profesor) |
 

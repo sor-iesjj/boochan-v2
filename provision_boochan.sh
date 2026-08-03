@@ -7,7 +7,7 @@
 # Podrías pasar estos parámetros como variables de entorno si quieres mayor flexibilidad
 DOMAIN_NAME=${1:-"BOOCHAN"}
 REALM_NAME=${2:-"BOOCHAN.SPACE"}
-ADMIN_PASS=${3:-"P@ssword2026!"}
+ADMIN_PASS=${3:-"P@ssw0rd"}
 DNS_FORWARDER="8.8.8.8"
 
 echo "--- Iniciando el despliegue desatendido del Reino: $REALM_NAME ---"

@@ -37,7 +37,7 @@
 > 1. Entra en el portal de Azure ([portal.azure.com](https://portal.azure.com)).
 > 2. Localiza tu máquina virtual `UbuntuServer`.
 > 3. En el menú izquierdo, busca **"Consola de serie"** (sección "Soporte y solución de problemas").
-> 4. Pulsa `Enter` para activar el prompt. Inicia sesión con `boochan` y `P@ssword2026!`.
+> 4. Pulsa `Enter` para activar el prompt. Inicia sesión con `boochan` y `P@ssw0rd.SOR.2026`.
 > 5. Vuelve al NSG de Azure y añade de nuevo la regla del puerto 22 (TCP, acción Permitir).
 > 6. Ya puedes reconectarte por SSH normalmente.
 >
@@ -465,7 +465,7 @@
 > [!example] Resolución — Acceso por Consola de Serie de Azure
 > 1. Entra en el portal de Azure ([portal.azure.com](https://portal.azure.com)).
 > 2. Localiza tu VM `UbuntuServer` → menú izquierdo → **"Consola de serie"**.
-> 3. Pulsa `Enter`. Inicia sesión con `boochan` y `P@ssword2026!`.
+> 3. Pulsa `Enter`. Inicia sesión con `boochan` y `P@ssw0rd.SOR.2026`.
 > 4. Edita el fichero y corrige la línea errónea:
 >    ```bash
 >    sudo nano /etc/fstab
