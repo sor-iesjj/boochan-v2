@@ -116,14 +116,18 @@
 > > [!info] 📚 Diccionario de Comandos: Para entender la sintaxis exacta y ver ejemplos de `apt`, `systemctl` y `rm`, consulta el [[Diccionario_Comandos_Sistema]].
 >
 > ```bash
-> # Detiene los servicios actuales (si no existen, el aviso es normal e inofensivo)
+> # 1. Detiene los servicios actuales (si no existen, el aviso es normal e inofensivo)
 > sudo systemctl stop smbd nmbd winbind 2>/dev/null || true
-> # Elimina agresivamente Samba y sus restos
-> sudo apt-get purge samba* -y
-> sudo apt-get autoremove -y
-> # Borra carpetas manuales para evitar residuos configurados
-> sudo rm -rf /etc/samba/ /var/lib/samba/ /var/cache/samba/ /run/samba/
+>
+> # 2. Elimina Samba, winbind y su configuración. Lista EXPLÍCITA, sin comodines
+> sudo apt purge -y samba samba-common samba-common-bin winbind libnss-winbind libpam-winbind
+> sudo apt autoremove -y
 > ```
+>
+> > [!danger] ⚠️ Por qué la lista va escrita entera y no `apt purge samba*`
+> > Verás por internet ese atajo con asterisco. **No lo uses en un borrado**, por dos motivos:
+> > 1. **El asterisco sin comillas lo interpreta primero la shell**, no `apt`: bash intenta expandirlo contra los ficheros del directorio donde estés, y el comando puede acabar haciendo algo distinto de lo que crees.
+> > 2. **Un comodín borra lo que caza, no lo que querías.** Y además **deja `winbind` vivo**, porque no empieza por "samba". En un servidor se escribe la lista de lo que se va a borrar, y se lee antes de pulsar Enter.
 >
 > > [!tip] 💡 ¿Qué hace este comando?
 > > - **El asterisco (`samba*`):** Es un "comodín". Le dice a Linux: "Borra todo lo que empiece por la palabra samba". Así nos aseguramos de no dejar herramientas sueltas.
@@ -133,8 +137,24 @@
 > [!example] Paso 2: Instalación de Dependencias Críticas
 > Instalamos las herramientas que permiten a Linux "disfrazarse" de servidor Windows:
 > ```bash
-> sudo apt update && sudo apt install acl attr samba krb5-user winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config wireguard resolvconf -y
+> sudo apt update && sudo apt install -y acl attr samba samba-ad-dc samba-ad-provision krb5-user winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config wireguard resolvconf
 > ```
+>
+> > [!danger] ⚠️ `samba-ad-dc` y `samba-ad-provision`: sin ellos la Fase 4 es IMPOSIBLE
+> > **Desde Ubuntu 24.04, el paquete `samba` ya NO incluye lo necesario para montar un controlador de dominio.** Se reparte en dos paquetes aparte:
+> >
+> > | Paquete | Qué aporta | Qué pasa si falta |
+> > | :--- | :--- | :--- |
+> > | **`samba-ad-provision`** | Los ficheros de esquema de Active Directory | El aprovisionamiento falla: *"AD_DS_Attributes... not found"* |
+> > | **`samba-ad-dc`** | El servicio `samba-ad-dc.service` y módulos internos | *"Unit samba-ad-dc.service does not exist"* y *"Module [samba_secrets] not found"* |
+> >
+> > Y lo peor: **los errores no aparecen aquí, sino dos fases más adelante**, en mitad del aprovisionamiento, con mensajes que no mencionan que falte un paquete.
+> >
+> > Comprueba que están:
+> > ```bash
+> > dpkg -s samba-ad-dc samba-ad-provision | grep -E '^Package|^Status'
+> > ```
+
 >
 > > [!caution] ⚠️ Si el comando falla a mitad de la instalación
 > > Este comando instala muchos paquetes a la vez. Si ves un error en rojo y la instalación se detiene, no entres en pánico. Ejecuta este comando para reparar los paquetes que quedaron a medias y vuelve a intentarlo:

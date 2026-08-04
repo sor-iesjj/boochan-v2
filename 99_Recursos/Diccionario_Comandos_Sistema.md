@@ -37,7 +37,7 @@ Systemd es el gestor central de Linux. Es el que arranca programas en segundo pl
 > [!example] Ejemplos de uso (Fase 2 y 4):
 > - `sudo apt update`: No instala nada. Sólo contacta con los servidores de Ubuntu para preguntar si hay nuevas actualizaciones.
 > - `sudo apt install samba winbind -y`: Descarga e instala esos dos programas de red. El `-y` responde "Sí" automáticamente a todo.
-> - `sudo apt-get purge samba*`: Elimina y desintegra radicalmente un paquete y todos los archivos residuales de configuración.
+> - `sudo apt purge <paquetes>`: Elimina el software **y** sus archivos de configuración (a diferencia de `remove`, que deja la configuración). Se escribe la **lista explícita** de paquetes, nunca un comodín como `samba*`: el asterisco lo expande la shell contra los ficheros del directorio, y además dejaría `winbind` vivo por no empezar por "samba".
 > - `sudo apt-get autoremove`: Borra paquetes de la basura que se instalaron como "ayudantes" pero que ya no sirven.
 
 ---

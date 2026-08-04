@@ -263,7 +263,7 @@
 ### Error 4.1 — `git clone` falla porque la URL no fue sustituida
 
 > [!bug] Cuándo se produce
-> Al ejecutar el comando de descarga del repositorio sin sustituir el texto `URL_DEL_REPOSITORIO` por la URL real. Git devuelve un error inmediato.
+> Al ejecutar el comando de descarga del repositorio sin sustituir el texto `https://github.com/sor-iesjj/bloque-4-ubuntu-nube-azure` por la URL real. Git devuelve un error inmediato.
 
 > [!info] ¿Hay que preocuparse?
 > No. El comando falla al instante sin haber hecho ningún cambio en el servidor.
@@ -293,7 +293,7 @@
 > **"Port 445 already in use":** Quedó algún proceso de Samba activo. Límpialo y vuelve a ejecutar el script:
 > ```bash
 > sudo systemctl stop smbd nmbd winbind 2>/dev/null || true
-> sudo apt-get purge samba* -y
+> sudo apt purge -y samba samba-common samba-common-bin winbind libnss-winbind libpam-winbind
 > sudo rm -rf /etc/samba/ /var/lib/samba/ /var/cache/samba/
 > sudo ./provision_boochan.sh
 > ```
